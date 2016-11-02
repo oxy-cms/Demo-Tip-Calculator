@@ -98,15 +98,71 @@ class TipCalculatorVC: UIViewController, UITextFieldDelegate, UITableViewDelegat
         return total
     }
     func splitBill(split: IndexPath) -> Double {
+        let constant = 25
+        var x = 33
+        let y = 27
         let amountOfPeople = Double(split.row + 2)
+       
+        let peopleIconImageView = UIImageView(image:UIImage(named: "peopleicon.png"))
+        
+        peopleIconImageView.contentMode = UIViewContentMode.scaleAspectFit
+        peopleIconImageView.frame.size.width = CGFloat(constant)
+        peopleIconImageView.frame.size.height = CGFloat(constant)
+   
+//        for i in 2...6 {
+//            peopleIconImageView.frame = CGRect(x: x+1, y: y, width: constant, height: constant)
+//            //cell.contentView.addSubview(peopleIconImageView)
+//            x+=25
+//        }
+        
+//        repeat {
+//        counter++
+
+//
+//        } while (amountOfPeople)
+        
         let newBill = calculateTotal(inputtedBill: billTextField, inputtedPercent: percentTextField)/amountOfPeople
-        print("bill with split is: " + String(newBill))
+        print("Bill with split is: " + String(newBill))
         return newBill
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let constant = 25
+        var x = 33
+        let y = 27
         let cell = self.tableView.dequeueReusableCell(withIdentifier: "SplitCell", for: indexPath) as! SplitCell
+        
+        
         cell.splitAmountLabel.text = String(format: "$%.2f", splitBill(split: indexPath))
+       
+        for i in 0...indexPath.row {
+            let peopleIconImageView = UIImageView(image:UIImage(named: "peopleicon.png"))
+            peopleIconImageView.contentMode = UIViewContentMode.scaleAspectFit
+            peopleIconImageView.frame.size.width = CGFloat(constant)
+            peopleIconImageView.frame.size.height = CGFloat(constant)
+            peopleIconImageView.frame = CGRect(x: x+1, y: y, width: constant, height: constant)
+            cell.contentView.addSubview(peopleIconImageView)
+            x+=25
+        }
+//        cell.peopleIconImageView3 =
+//        let amountOfPeople = Double(split.row + 2)
+//
+
+//        
+
+        
+        //        for i in 2...6 {
+        
+        //            //
+        //            x+=25
+        //        }
+        
+        //        repeat {
+        //        counter++
+        
+        //
+        //        } while (amountOfPeople)
+        
         
         return cell
     }
